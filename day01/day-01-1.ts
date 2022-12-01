@@ -1,8 +1,6 @@
 import fs from 'fs';
-// import { Elf } from './elf';
-export class Elf {
-  constructor(public calories: number) {}
-}
+import { validateHeaderName } from 'http';
+import { Elf } from './elf';
 
 try {
   const input = fs.readFileSync('./day01/elf-calories.txt', 'utf8');
@@ -19,7 +17,10 @@ try {
     }
   });
   const sortedElves = elves.sort((elf1: Elf, elf2: Elf) => { return elf2.calories - elf1.calories});
-  console.log(sortedElves[0]); // answer
+  console.log('Puzzle 1:', sortedElves[0]);
+  const topThreeElves = sortedElves.slice(0,3);
+  const topThreeCalories = topThreeElves.reduce((total, elf) => total + elf.calories, 0)
+  console.log('Puzzle 2: ', topThreeCalories);
 } catch  (err) {
   console.log(err);
 }
